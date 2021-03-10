@@ -1,6 +1,5 @@
 //Card Factory
-
-export class Card {
+ class Card {
     
     constructor(title, author, content, priority, id) {
         const initialDate = new Date();
@@ -19,3 +18,4 @@ export class Card {
 
 }
 
+export {Card};

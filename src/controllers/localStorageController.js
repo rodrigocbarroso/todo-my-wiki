@@ -1,4 +1,4 @@
-export const localStorageController = (function () {
+const localStorageController = (function () {
     
     let mainStorage = {
         "cardList": [],
@@ -55,3 +55,4 @@ export const localStorageController = (function () {
 
 })();
 
+export { localStorageController };

@@ -2,8 +2,9 @@
   "name": "todo-my-wiki",
   "version": "1.0.0",
   "description": "ToDo personal Wiki",
-  "main": "index.js",
   "type": "module",
+  "private":  true,
+
   "scripts": {
     "test": "mocha"
   },

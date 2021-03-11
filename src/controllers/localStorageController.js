@@ -1,8 +1,10 @@
+import { Card } from '../Models/Card';
+
 const localStorageController = (function () {
     
     let mainStorage = {
         "cardList": [],
-        "size": 0
+        "idCounter": 0
     }
 
     //source MDN
@@ -31,28 +33,43 @@ const localStorageController = (function () {
         }
     }
 
-    const  saveCard = (card) => {
+    const accessLocalStorage = () => {
         if (storageAvailable) {
             const ls = window.localStorage;
-            storageBuffer = JSON.parse(ls.getItem("mainStorage"));
-            storageBuffer.cardList.push(card);
-            storageBuffer.size++;
-            ls.setItem("mainStorage",JSON.stringify(storageBuffer));
+            if(ls.getItem("mainStorage") == null) {
+                // initialize mainStorage @ localStorage
+                ls.setItem("mainStorage",mainStorage);
+            } 
+            return ls;
         } else {
-            throw Error('saveCard() -> localStorage unavailable');
+            throw Error('local Storage couldn\'t be accessed');
         }
     }
 
+    const  newCard = (card = new Card) => {
+        const ls = accessLocalStorage();
+        let storageBuffer = JSON.parse(ls.getItem("mainStorage"));
+        card._id = storageBuffer.idCounter++;
+        storageBuffer.cardList.push(card);
+        ls.setItem("mainStorage",JSON.stringify(storageBuffer));
+    }
+
     const removeCard = (card) => {
+ 	    const ls = accessLocalStorage();
+    }
+
+    const updateCard = (card) => {
 
     }
 
     return {
         storageAvailable,
-        saveCard,
-        removeCard
+        newCard,
+        removeCard,
+    	updateCard
     }
 
 })();
 
 export { localStorageController };
+

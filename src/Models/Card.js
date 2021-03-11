@@ -8,7 +8,7 @@
         this._author = author;
         this._content = content;
         this._priority = priority;
-           
+        this._id = id;
     }
 
     set title(str) {

@@ -1,0 +1,29 @@
+
+
+.container-global {
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.container-navigation {
+    display: flex;
+    flex-direction: column;
+    max-width: 25%;
+    padding: 1em;
+    border-style: dashed;
+    border-width: 1;
+    border-color: black;
+}
+
+.container-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1em;
+    margin-left: 0.5em;
+    border-style: dashed;
+    border-width: 1;
+    border-color: rgb(75, 29, 29);
+}

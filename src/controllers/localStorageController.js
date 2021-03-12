@@ -38,7 +38,7 @@ const localStorageController = (function () {
             const ls = window.localStorage;
             if(ls.getItem("mainStorage") == null) {
                 // initialize mainStorage @ localStorage
-                ls.setItem("mainStorage",mainStorage);
+                ls.setItem("mainStorage",JSON.stringify(mainStorage));
             } 
             return ls;
         } else {
@@ -49,7 +49,8 @@ const localStorageController = (function () {
     const  newCard = (card = new Card) => {
         const ls = accessLocalStorage();
         let storageBuffer = JSON.parse(ls.getItem("mainStorage"));
-        card._id = storageBuffer.idCounter++;
+        storageBuffer.idCounter++;
+        card._id = storageBuffer.idCounter;
         storageBuffer.cardList.push(card);
         ls.setItem("mainStorage",JSON.stringify(storageBuffer));
     }
@@ -62,11 +63,23 @@ const localStorageController = (function () {
 
     }
 
+    const getList = () => {
+        const ls = accessLocalStorage();
+        let storageBuffer = JSON.parse(ls.getItem("mainStorage"));
+        return storageBuffer.cardList;
+    }
+
+    const getCardById = (id) => {
+
+    }
+
     return {
         storageAvailable,
         newCard,
         removeCard,
-    	updateCard
+    	updateCard,
+        getList,
+        getCardById
     }
 
 })();

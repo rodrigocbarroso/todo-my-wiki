@@ -1,11 +1,11 @@
 //Card Factory
  class Card {
     
-    constructor(title, author, content, priority, id) {
+    constructor(title, project, content, priority, id) {
         const initialDate = new Date();
         this._creationDate = initialDate.getDate();
         this._title = title;
-        this._author = author;
+        this._project = project;
         this._content = content;
         this._priority = priority;
         this._id = id;

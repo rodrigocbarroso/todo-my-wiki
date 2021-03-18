@@ -1,53 +1,90 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title>To-Do-MyWiki</title>
+    
     <link href="styles.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="container-global">
-        <div class="container-navigation" id="navigation">
-            <h4>Navigation</h4>
-            <p>Home</p>
-            <p>List</p>
-            <p>Create</p>
-            <p>About</p>
+        <div class="container-top">
+            <div class="row">
+                <h4>App Title</h4>
+            </div>
         </div>
-        <div class="container-content" id="content">
-            <h4>Card Title</h4>
-            <div class="createView">
+        <div class="container-projectlist">
+            <div class="row">
 
-                <p>Id:</p>
-                <p>Author:</p>
-                <p>Creation Date:</p>
-                <div class="controls">
-                    <form>
-                        <input id='title-input' type="text">
-                        <input id='project-selector' type="">
-                        <input id="priority-selector" type="">
-                        <input id='card-text-input' type="text">
-                        <button value="create-card-btn" name="create-card-btn" type="button" id="create-card-btn">Create Card</button>
-                
-                    </form>
+                <button class="item">New Project</button>
+                <span class="item">Total Projects: </span>
+            </div>
+            <div class="hidden">
+                <div class="row">
+                    <input type="text" name="Project Name" id="input-project-name" class="item">
                 </div>
-                <div class="view">
-                    
+                <div class="row">
+                    <button class="item">Add Project</button>
+                    <button class="item">Cancel</button>
                 </div>
             </div>
-            <h4>Card Title</h4>
-            <div class="listView">
-
-                <p>Id:</p>
-                <p>Author:</p>
-                <p>Creation Date:</p>
+            <div class="row">
+                Project List
+            </div>
+            <div class="row project top-border">
+                <div class="naming">Project Name</div>
+                <div class="priority-list">
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                    <svg width="10" height="10">
+                        <rect class="sqr-priority-0" width="10" height="10" />
+                    </svg>
+                </div>
+                <button>X</button>
                 
-                <div class="view">
-                    
+            </div>
+        </div>
+        <div class="container-cardlist">
+            <div class="row header">
+                Card List
+            </div>
+            <div class="row card top-border">
+                <span>Card Title</span><span>Time Left</span><button>Complete</button>
+            </div>
+            <div class="row">
+                <button class="add-btn position-right">+ Add Card</button>
+            </div>
+            <div class="hidden" id="add-card-section">
+                <div class="row">
+                    <input class="title-input" type="text" name="card-title-input" id="card-title-input" placeholder="Task Title">
+                    <input class="range-input" type="range" name="card-priority-input" id="card-priority-input">
+                </div>
+                <div class="row">
+                    <input class="notes-input" type="text" name="card-notes-input" id="card-notes-input" placeholder="Notes">
+                </div>
+                <div class="row">
+                    <button class="item">Add Task</button>
+                    <button class="item">Cancel</button>
                 </div>
             </div>
-            
         </div>
-        
+
 
     </div>
 

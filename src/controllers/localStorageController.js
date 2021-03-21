@@ -1,9 +1,10 @@
 import { Card } from '../Models/Card';
+import { Project } from '../Models/Project';
 
 const localStorageController = (function () {
     
     let mainStorage = {
-        "cardList": [],
+        "projects": [],
         "idCounter": 0
     }
 
@@ -33,44 +34,75 @@ const localStorageController = (function () {
         }
     }
 
-    const accessLocalStorage = () => {
+    const getMainStorage = () => {
         if (storageAvailable) {
             const ls = window.localStorage;
             if(ls.getItem("mainStorage") == null) {
                 // initialize mainStorage @ localStorage
                 ls.setItem("mainStorage",JSON.stringify(mainStorage));
             } 
-            return ls;
+            return JSON.parse(ls.getItem("mainStorage"));
         } else {
             throw Error('local Storage couldn\'t be accessed');
         }
     }
 
+    const setMainStorage = (storageBuffer) => {
+        if (storageAvailable) {
+            const ls = window.localStorage;
+            ls.setItem("mainStorage",JSON.stringify(storageBuffer));
+            return storageBuffer;
+        } else {
+            throw Error('local Storage couldn\'t be accessed');
+        }
+    }
+
+    const newProject = (title) => {
+        const proj = new Project(title);
+        let storageBuffer = getMainStorage();
+        storageBuffer.projects.push(proj);
+        setMainStorage(storageBuffer);
+        console.log('Project Create Successfully');
+        return storageBuffer;
+    }
+
+
+
     const  newCard = (card = new Card) => {
-        const ls = accessLocalStorage();
-        let storageBuffer = JSON.parse(ls.getItem("mainStorage"));
+ 
+        let storageBuffer = getMainStorage();
         storageBuffer.idCounter++;
         card._id = storageBuffer.idCounter;
         storageBuffer.cardList.push(card);
-        ls.setItem("mainStorage",JSON.stringify(storageBuffer));
+      //  ls.setItem("mainStorage",JSON.stringify(storageBuffer));
     }
 
     const removeCard = (card) => {
- 	    const ls = accessLocalStorage();
+ 	    
     }
 
     const updateCard = (card) => {
 
     }
 
+    const getProjectList = () => {
+        let storageBuffer = getMainStorage();
+        return storageBuffer.projects;
+    }
+
     const getList = () => {
-        const ls = accessLocalStorage();
-        let storageBuffer = JSON.parse(ls.getItem("mainStorage"));
+       
+        let storageBuffer = getMainStorage();
         return storageBuffer.cardList;
     }
 
     const getCardById = (id) => {
 
+    }
+
+    const clear = () => {
+        // initialize mainStorage @ localStorage
+        window.localStorage.setItem("mainStorage",JSON.stringify(mainStorage));
     }
 
     return {
@@ -79,7 +111,10 @@ const localStorageController = (function () {
         removeCard,
     	updateCard,
         getList,
-        getCardById
+        getCardById,
+        getProjectList,
+        newProject,
+        clear
     }
 
 })();

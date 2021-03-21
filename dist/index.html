@@ -16,22 +16,23 @@
         <div class="container-projectlist">
             <div class="row">
 
-                <button class="item">New Project</button>
-                <span class="item">Total Projects: </span>
+                <button class="item" id="new-project-btn">New Project</button>
+                <span class="item" id="project-counter">Total Projects: </span>
             </div>
-            <div class="hidden">
+            <div class="hidden translateX" id="new-project-section">
                 <div class="row">
-                    <input type="text" name="Project Name" id="input-project-name" class="item">
+                    <label>Name your Project: <input type="text" name="Project Name" id="input-project-name" class="item"></label>
                 </div>
                 <div class="row">
-                    <button class="item">Add Project</button>
-                    <button class="item">Cancel</button>
+                    <button class="item" id="add-project-btn">Add Project</button>
+                    <button class="item" id="new-project-btn">Cancel</button>
                 </div>
             </div>
             <div class="row">
                 Project List
             </div>
-            <div class="row project top-border">
+            <div class="project-list">
+          <!-- <div class="row project top-border">
                 <div class="naming">Project Name</div>
                 <div class="priority-list">
                     <svg width="10" height="10">
@@ -114,8 +115,10 @@
                 </div>
                 <button>X</button>
                 
+            </div> --> 
             </div>
         </div>
+        
         <div class="container-cardlist">
             <div class="row header">
                 Card List
@@ -153,7 +156,7 @@
             <div class="row">
                 <button class="add-btn position-right">+ Add Card</button>
             </div>
-            <div class="hidden" id="add-card-section">
+            <div class="" id="add-card-section">
                 <div class="row">
                     <table>
                         <tr>

@@ -25,11 +25,14 @@ const showProjectList = () => {
     
     console.log(list);
     list.forEach( (proj) => {
+        //element: project row and name
         const element = document.createElement('div');
         element.classList.add("row");
         element.classList.add("project");
         element.classList.add("top-border");
-        element.innerHTML =  `<div class="naming">${proj._title}</div>`
+        const pjid = "pjid-" + proj._title; //naming convenction of project id to handle selection
+        element.innerHTML =  `<div class="naming" id="${pjid}">${proj._title}</div>`
+        //element: priority list
         const priorityListElement = document.createElement('div');
         priorityListElement.classList.add('priority-list');
         proj._cards.forEach( (card) => {
@@ -38,52 +41,70 @@ const showProjectList = () => {
                                              </svg>
                                              <button>X<button>`;
         });
-    
+        //element: delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = "X";
+
+        // bundle up
         container.appendChild(element);
         container.appendChild(priorityListElement);
+        element.appendChild(deleteBtn);
+
+        //click handling
+        element.addEventListener("click", (e) => {
+            console.log(`click no projeto ${proj._title}`);
+        });
+        deleteBtn.addEventListener("click", (e) => {
+            console.log(e);
+            e.stopPropagation();
+        })
     });
 }
 
-
-//toggle new project section (for hidden/show behavior)
-let projectTabOpen = false;
-const toggleNewProjectSection = () => {
-    if(!projectTabOpen) {
-        document.querySelector("#new-project-section").classList.remove("hidden");
-        projectTabOpen = true;
-        const checkH = document.querySelector("#new-project-section").scrollHeight;
-
-        document.querySelector("#new-project-section").classList.add("done");
+//TOGGLE: show/hide section
+//requires initial classes class="hidden translateX"
+let openSections = {};
+const toggleViewSection = (sectionId) => {
+    if(!openSections[`${sectionId}`]) {
+        document.querySelector(sectionId).classList.remove("hidden");
+        openSections[`${sectionId}`] = true;
+        const checkH = document.querySelector(sectionId).scrollHeight;
+        document.querySelector(sectionId).classList.add("done");
     } else {
-        document.querySelector("#new-project-section").classList.remove("done");
-        document.querySelector("#new-project-section").classList.add("hidden");
-
-        projectTabOpen = false;
+        document.querySelector(sectionId).classList.remove("done");
+        document.querySelector(sectionId).classList.add("hidden");
+        openSections[`${sectionId}`] = false;
     }
+    console.log(openSections);
 }
 
-//new project button handler
-
+//Button: new project button handler
 document.querySelectorAll("#new-project-btn").forEach( (btn) => {
     btn.addEventListener('click', (e) => {
-        toggleNewProjectSection();
+        toggleViewSection("#new-project-section");
         console.log("new-project-btn: click");
-
         return;
     });    
 });
 
-//add project btn handler
+//Button: Add project btn handler
 document.querySelector("#add-project-btn").addEventListener("click", (e) => {
     //get input (title)
    console.log(document.querySelector("#input-project-name").value);
    const title = document.querySelector("#input-project-name").value;
    const buffer = localStorageController.newProject(title);
-    toggleNewProjectSection();
+    toggleViewSection("#new-project-section");
     console.log(buffer);
     refresh();
 });
 
+//Button: Add Card Handler
+const cardSectionBtns = document.querySelectorAll("#add-card-btn,#discard-card-btn");
+cardSectionBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        toggleViewSection("#add-card-section");   
+    });
+});
 
 
 refresh();
